@@ -24,6 +24,17 @@ const validation = {
             }
             next(); // Move to the next middleware or controller if no errors
         }
+    ],
+    postValidator: [
+        body('title').notEmpty().withMessage("should not be empty"),
+        body('content').notEmpty().withMessage("should not be empty"),
+        (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+            next(); // Move to the next middleware or controller if no errors
+        }
     ]
 }
 

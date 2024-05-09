@@ -12,15 +12,7 @@ const schema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  comments: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Comment'
-  }]
+  }
 },
   {
     timestamps: true
