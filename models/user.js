@@ -11,6 +11,14 @@ const schema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    firstName: {
+        type: String,
+        required: false,
+    },
+    lastName: {
+        type: String,
+        required: false,
+    },
     password: {
         type: String,
         required: true
@@ -26,5 +34,10 @@ const schema = new mongoose.Schema({
         timestamps: true
     }
 );
+schema.virtual('fullName').get(function () {
+    return `${this.firstName} ${this.lastName}`.trim();
+});
+
+schema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('User', schema);
